@@ -4,69 +4,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="PS Business Group — grupo empresarial binacional com atuação no Brasil e Paraguai, reunindo empresas em múltiplos segmentos." />
-  <meta name="theme-color" content="#050505" />
+  <meta name="theme-color" content="#080808" />
   <title>PS Business Group</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    /*
+      Paleta fiel ao logo:
+      Fundo:      #080808  (preto profundo do logo)
+      Cinza aço:  #8a8a8a  (tom exato do monograma PS)
+      Prata:      #b8b8b8  (destaques secundários)
+      Texto:      #e8e8e8  (legibilidade sem branco puro)
+      Sem dourado. Zero cor de acento externa.
+    */
     :root {
-      --bg: #050505;
-      --panel: rgba(255,255,255,0.04);
-      --panel-2: rgba(255,255,255,0.055);
-      --text: #f4f4f4;
-      --muted: rgba(244,244,244,0.70);
-      --muted-2: rgba(244,244,244,0.52);
-      --line: rgba(255,255,255,0.10);
-      --accent: #a2a2a2;
-      --accent-2: #6f6f6f;
-      --shadow: 0 26px 80px rgba(0,0,0,0.34);
-      --radius-xl: 30px;
-      --radius: 22px;
-      --radius-sm: 16px;
-      --max: 1180px;
+      --bg:         #080808;
+      --surface:    rgba(255,255,255,0.04);
+      --surface-2:  rgba(255,255,255,0.06);
+      --surface-h:  rgba(255,255,255,0.085);
+      --line:       rgba(255,255,255,0.08);
+      --line-2:     rgba(255,255,255,0.14);
+      --text:       #e8e8e8;
+      --muted:      #8a8a8a;
+      --muted-2:    #535353;
+      --silver:     #b8b8b8;
+      --radius-xl:  28px;
+      --radius:     20px;
+      --radius-sm:  14px;
+      --max:        1200px;
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: var(--sans);
+      background: var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 28%),
-        radial-gradient(circle at 85% 10%, rgba(255,255,255,0.05), transparent 28%),
-        linear-gradient(180deg, #050505 0%, #060606 100%);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img { display: block; max-width: 100%; }
 
-    .noise::before {
+    /* grain */
+    body::before {
       content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.028;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
       mix-blend-mode: overlay;
     }
 
-    .container {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
+    /* ambient light — very subtle, top corners only */
+    body::after {
+      content: "";
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 32% at 12% 0%, rgba(200,200,200,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 26% at 88% 4%, rgba(255,255,255,0.025) 0%, transparent 70%);
     }
 
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    /* ── NAV ── */
     .nav-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(5,5,5,0.76);
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      background: rgba(8,8,8,0.9);
       border-bottom: 1px solid var(--line);
     }
 
@@ -75,557 +91,589 @@
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      padding: 16px 0;
+      padding: 17px 0;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
+    .brand { display: flex; align-items: center; gap: 14px; }
+
+    .brand-logo {
+      width: 42px; height: 42px;
+      border-radius: 9px;
+      border: 1px solid var(--line-2);
+      background: #0d0d0d;
+      overflow: hidden; flex: 0 0 auto;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .brand img {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--line);
-      flex: 0 0 auto;
-      background: #000;
-    }
+    .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
 
-    .brand strong {
-      font-size: 0.96rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
+    .brand-text strong {
       display: block;
-      line-height: 1.1;
-    }
-
-    .brand span {
-      display: block;
-      font-size: 0.78rem;
-      color: var(--muted-2);
-      margin-top: 3px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a {
-      font-size: 0.92rem;
-      color: var(--muted);
-      transition: color .2s ease;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    section { padding: 76px 0; }
-
-    .hero {
-      padding-top: 92px;
-      padding-bottom: 48px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 26px;
-      align-items: stretch;
-    }
-
-    .hero-copy, .hero-card, .card, .section-card, .quote-box, .company-card, .value-card {
-      background: linear-gradient(180deg, var(--panel), transparent);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-copy {
-      padding: 46px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted-2);
-      margin-bottom: 18px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      background: var(--accent);
-      opacity: .95;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.6rem, 5.2vw, 5.8rem);
-      line-height: 0.94;
-      letter-spacing: -0.06em;
-      max-width: 11ch;
-    }
-
-    .hero p {
-      margin: 22px 0 0;
-      max-width: 62ch;
-      color: var(--muted);
-      font-size: 1.02rem;
-      line-height: 1.85;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .btn, .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 46px;
-      padding: 0 18px;
-      border-radius: 999px;
-      font-weight: 600;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-      border: 1px solid var(--line);
-    }
-
-    .btn {
-      background: linear-gradient(135deg, #a7a7a7, #6f6f6f);
-      color: #111;
-      border-color: transparent;
-    }
-
-    .btn-ghost {
-      background: var(--panel-2);
+      font-size: 0.84rem; font-weight: 500;
+      letter-spacing: 0.13em; text-transform: uppercase;
       color: var(--text);
     }
 
-    .btn:hover, .btn-ghost:hover { transform: translateY(-1px); }
+    .brand-text span {
+      display: block;
+      font-size: 0.71rem; color: var(--muted-2);
+      margin-top: 2px; letter-spacing: 0.05em;
+    }
 
-    .stats {
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+
+    .nav-links a {
+      font-size: 0.85rem; color: var(--muted);
+      padding: 8px 14px; border-radius: 999px;
+      transition: color .2s, background .2s;
+    }
+
+    .nav-links a:hover { color: var(--text); background: var(--surface); }
+
+    .nav-cta {
+      display: inline-flex; align-items: center;
+      height: 36px; padding: 0 18px; border-radius: 999px;
+      font-size: 0.83rem; font-weight: 500;
+      border: 1px solid var(--line-2);
+      background: var(--surface); color: var(--silver);
+      transition: background .2s, border-color .2s, color .2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--surface-2);
+      border-color: rgba(180,180,180,0.28);
+      color: var(--text);
+    }
+
+    /* ── HERO ── */
+    .hero { padding: 108px 0 72px; }
+
+    .hero-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 36px;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 22px; align-items: stretch;
+    }
+
+    .hero-copy {
+      background: linear-gradient(148deg, var(--surface-2) 0%, transparent 68%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 54px 54px 46px;
+      position: relative; overflow: hidden;
+    }
+
+    /* top shimmer — echoes the logo's square frame border */
+    .hero-copy::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(180,180,180,0.18) 40%, rgba(180,180,180,0.18) 60%, transparent 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.7rem; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 26px;
+    }
+
+    .eyebrow-dash {
+      width: 28px; height: 1px;
+      background: var(--muted); opacity: 0.6;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.4rem, 5.6vw, 6.8rem);
+      font-weight: 600;
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      max-width: 10ch;
+    }
+
+    h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--silver);
+    }
+
+    .hero-desc {
+      margin-top: 28px; max-width: 54ch;
+      color: var(--muted);
+      font-size: 0.99rem; line-height: 1.84; font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px;
+    }
+
+    /* primary button: dark grey fill, silver text — logo tones */
+    .btn-primary {
+      display: inline-flex; align-items: center;
+      height: 48px; padding: 0 26px; border-radius: 999px;
+      font-size: 0.86rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: #191919; color: var(--silver);
+      border: 1px solid rgba(180,180,180,0.18);
+      transition: background .2s, border-color .2s, color .2s, transform .2s;
+    }
+
+    .btn-primary:hover {
+      background: #222;
+      border-color: rgba(180,180,180,0.32);
+      color: var(--text); transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center;
+      height: 48px; padding: 0 26px; border-radius: 999px;
+      font-size: 0.86rem; font-weight: 400; letter-spacing: 0.04em;
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--line);
+      transition: color .2s, border-color .2s, transform .2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text); border-color: var(--line-2); transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 40px;
     }
 
     .stat {
-      padding: 18px;
-      border-radius: var(--radius-sm);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      min-height: 112px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 18px 16px; border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.03); border: 1px solid var(--line);
     }
 
     .stat strong {
       display: block;
-      font-size: 1.4rem;
-      letter-spacing: -0.03em;
+      font-family: var(--serif);
+      font-size: 1.55rem; font-weight: 600;
+      color: var(--text); line-height: 1; margin-bottom: 8px;
     }
 
     .stat span {
-      display: block;
-      color: var(--muted);
-      margin-top: 6px;
-      font-size: 0.9rem;
-      line-height: 1.5;
+      display: block; font-size: 0.79rem;
+      color: var(--muted); line-height: 1.5; letter-spacing: 0.02em;
     }
 
+    /* hero right card */
     .hero-card {
-      padding: 24px;
-      display: grid;
-      gap: 14px;
+      background: linear-gradient(148deg, var(--surface-2) 0%, transparent 70%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 30px; display: grid; gap: 18px; align-content: start;
     }
 
-    .hero-card .title {
-      color: var(--muted-2);
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+    .card-label {
+      font-size: 0.69rem; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--muted-2);
     }
 
     .hero-card h2 {
-      margin: 0;
-      font-size: 1.38rem;
-      line-height: 1.12;
-      letter-spacing: -0.03em;
+      font-family: var(--serif);
+      font-size: 1.46rem; font-weight: 600;
+      line-height: 1.12; color: var(--text);
     }
 
-    .hero-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.96rem;
+    .hero-card > p {
+      color: var(--muted); font-size: 0.9rem;
+      line-height: 1.72; font-weight: 300;
     }
 
-    .logo-spot {
-      margin-top: 8px;
-      aspect-ratio: 1 / 1;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      background:
-        radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 54%),
-        linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
-      display: grid;
-      place-items: center;
-      padding: 26px;
-      overflow: hidden;
+    /* logo showcase — reproduces the square-framed mark of the logo */
+    .logo-stage {
+      aspect-ratio: 1/1;
+      border-radius: 14px;
+      border: 1px solid rgba(138,138,138,0.22);
+      background: #0c0c0c;
+      display: grid; place-items: center;
+      padding: 22px; overflow: hidden; position: relative;
     }
 
-    .logo-spot img {
-      width: min(72%, 230px);
-      opacity: 0.96;
-      filter: drop-shadow(0 10px 26px rgba(0,0,0,.2));
+    /* inner frame detail — mirrors the logo's square border */
+    .logo-stage::after {
+      content: "";
+      position: absolute; inset: 8px;
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px; pointer-events: none;
     }
 
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+    .logo-stage img {
+      width: min(80%, 210px);
+      opacity: 0.94;
+      filter: drop-shadow(0 6px 22px rgba(0,0,0,0.8));
     }
+
+    .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
     .mini {
-      padding: 16px;
-      border-radius: var(--radius-sm);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      min-height: 98px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 14px; border-radius: var(--radius-sm);
+      background: var(--surface); border: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 5px;
     }
 
-    .mini strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.98rem;
+    .mini strong { font-size: 0.87rem; font-weight: 500; color: var(--text); }
+    .mini span { font-size: 0.79rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 0; position: relative; z-index: 1; }
+
+    .section-header { margin-bottom: 38px; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.69rem; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
     }
 
-    .mini span {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.55;
+    .section-label::before {
+      content: ""; width: 24px; height: 1px;
+      background: var(--muted); opacity: 0.55;
     }
 
-    .section-head {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 22px;
+    .section-header h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 2.6vw, 3rem);
+      font-weight: 600; letter-spacing: -0.01em;
+      line-height: 0.96; color: var(--text); margin-bottom: 12px;
     }
 
-    .section-head h3 {
-      margin: 0;
-      font-size: clamp(1.55rem, 2vw, 2.35rem);
-      letter-spacing: -0.04em;
+    .section-header p {
+      color: var(--muted); font-size: 0.93rem;
+      line-height: 1.72; max-width: 66ch; font-weight: 300;
     }
 
-    .section-head p {
-      margin: 0;
-      max-width: 100%;
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 0.95rem;
+    .divider {
+      height: 1px; position: relative; z-index: 1;
+      background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
     }
 
+    /* ── SOBRE ── */
     .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 
-    .section-card, .card, .quote-box {
-      padding: 26px;
-      border-radius: var(--radius);
-      transition: transform .2s ease, border-color .2s ease;
-      background: linear-gradient(180deg, var(--panel), transparent);
+    .info-card {
+      background: linear-gradient(148deg, var(--surface-2) 0%, transparent 72%);
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 30px;
+      transition: border-color .28s, transform .28s;
     }
 
-    .section-card:hover, .card:hover, .quote-box:hover {
-      transform: translateY(-2px);
-      border-color: color-mix(in srgb, #9f9f9f 28%, var(--line));
+    .info-card:hover { border-color: var(--line-2); transform: translateY(-2px); }
+
+    .card-num {
+      font-family: var(--serif); font-size: 2.2rem; font-weight: 400;
+      color: var(--muted-2); line-height: 1; margin-bottom: 18px;
     }
 
-    .section-card h4, .card h4 {
-      margin: 0 0 12px;
-      font-size: 1.08rem;
-      letter-spacing: -0.02em;
+    .info-card h4 {
+      font-size: 1.02rem; font-weight: 500;
+      color: var(--text); margin-bottom: 10px;
     }
 
-    .section-card p, .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.72;
-      font-size: 0.95rem;
-    }
+    .info-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.74; font-weight: 300; }
 
-    .icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 14px;
-      border: 1px solid var(--line);
-      background: var(--panel);
-      color: #a3a3a3;
-      font-weight: 700;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      height: 28px;
-      padding: 0 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--panel);
-      color: var(--muted);
-      font-size: 0.78rem;
-      white-space: nowrap;
-    }
-
-    .company-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
+    /* ── EMPRESAS ── */
     .companies {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      align-items: stretch;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 18px; align-items: stretch;
     }
 
     .company-card {
-      padding: 26px;
-      border-radius: var(--radius);
-      min-height: 205px;
-      display: flex;
-      flex-direction: column;
+      background: linear-gradient(148deg, var(--surface-2) 0%, transparent 72%);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px; display: flex; flex-direction: column; gap: 14px;
+      transition: border-color .28s, transform .28s, background .28s;
     }
 
-    .company-card p { color: var(--muted); line-height: 1.72; font-size: 0.95rem; margin: 0; }
-    .company-card .meta {
-      margin-top: auto;
-      padding-top: 18px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .company-card:hover {
+      border-color: var(--line-2); transform: translateY(-2px);
+      background: linear-gradient(148deg, var(--surface-h) 0%, transparent 68%);
     }
 
-    .values {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      align-items: stretch;
+    .company-logo {
+      width: 50px; height: 50px; border-radius: 10px;
+      border: 1px solid var(--line-2); background: #101010;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex: 0 0 auto;
     }
+
+    .company-logo img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+
+    .company-logo-fb {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
+      color: var(--muted); line-height: 1;
+    }
+
+    .company-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 10px;
+    }
+
+    .company-name {
+      font-size: 0.99rem; font-weight: 500;
+      color: var(--text); letter-spacing: -0.01em; line-height: 1.2;
+    }
+
+    /* pill: small square border, uppercase — matches logo's serif/frame aesthetic */
+    .pill {
+      display: inline-flex; align-items: center;
+      height: 23px; padding: 0 9px; border-radius: 3px;
+      border: 1px solid var(--line-2); background: transparent;
+      color: var(--muted-2); font-size: 0.69rem;
+      white-space: nowrap; letter-spacing: 0.09em; text-transform: uppercase;
+    }
+
+    .pill-accent {
+      border-color: rgba(184,184,184,0.2);
+      background: rgba(184,184,184,0.05);
+      color: var(--silver);
+    }
+
+    .company-desc {
+      color: var(--muted); font-size: 0.87rem;
+      line-height: 1.7; font-weight: 300; flex: 1;
+    }
+
+    .company-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: auto; }
+
+    /* ── VALORES ── */
+    .values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 
     .value-card {
-      padding: 24px;
-      border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
-      min-height: 168px;
+      background: linear-gradient(168deg, var(--surface-2) 0%, transparent 78%);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px; display: flex; flex-direction: column; gap: 10px;
+      transition: border-color .28s, transform .28s;
     }
 
-    .value-card strong { display: block; margin-bottom: 10px; }
-    .value-card p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 0.94rem; }
+    .value-card:hover { border-color: var(--line-2); transform: translateY(-2px); }
 
-    .timeline {
-      display: grid;
-      gap: 0;
-      overflow: hidden;
+    /* Roman numerals in serif — direct visual echo of the PS monogram */
+    .value-mark {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 400;
+      color: var(--muted-2); letter-spacing: 0.06em; margin-bottom: 4px;
+    }
+
+    .value-card strong {
+      font-size: 0.95rem; font-weight: 500; color: var(--text);
+    }
+
+    .value-card p {
+      font-size: 0.85rem; color: var(--muted);
+      line-height: 1.68; font-weight: 300; margin: 0;
+    }
+
+    /* ── ESTRUTURA ── */
+    .structure-card {
+      background: linear-gradient(148deg, var(--surface-2) 0%, transparent 70%);
+      border: 1px solid var(--line); border-radius: var(--radius-xl); overflow: hidden;
     }
 
     .timeline-item {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 18px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 130px 1fr;
+      gap: 22px; align-items: start;
+      padding: 28px 32px; border-bottom: 1px solid var(--line);
+      transition: background .2s;
     }
 
     .timeline-item:last-child { border-bottom: none; }
-    .timeline-item strong { font-size: 1rem; letter-spacing: -0.02em; }
-    .timeline-item span { color: var(--muted); line-height: 1.72; }
+    .timeline-item:hover { background: var(--surface); }
 
-    .contact-box {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 18px;
-      align-items: stretch;
+    .tl-key {
+      font-family: var(--serif); font-size: 1.1rem;
+      font-weight: 600; color: var(--silver); padding-top: 1px;
     }
 
-    .contact-list { display: grid; gap: 12px; margin-top: 16px; }
+    .tl-val { color: var(--muted); font-size: 0.9rem; line-height: 1.72; font-weight: 300; }
+
+    /* ── CONTATO ── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 18px; align-items: stretch;
+    }
+
+    .contact-card {
+      background: linear-gradient(148deg, var(--surface-2) 0%, transparent 70%);
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 32px;
+    }
+
+    .contact-card h4 {
+      font-family: var(--serif); font-size: 1.42rem;
+      font-weight: 600; color: var(--text); margin-bottom: 8px;
+    }
+
+    .contact-card > p {
+      color: var(--muted); font-size: 0.9rem;
+      line-height: 1.68; font-weight: 300; margin-bottom: 24px;
+    }
+
+    .contact-list { display: grid; }
 
     .contact-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line);
     }
 
     .contact-row:last-child { border-bottom: none; }
-    .contact-row strong { display: block; margin-bottom: 4px; }
-    .contact-row span { color: var(--muted); font-size: 0.94rem; }
 
-    .quote-box {
-      display: grid;
-      gap: 12px;
-      align-content: start;
+    .contact-row strong {
+      display: block; font-size: 0.87rem; font-weight: 500;
+      color: var(--text); margin-bottom: 3px;
     }
 
-    .quote-box .quote {
-      font-size: 1.02rem;
-      line-height: 1.85;
-      color: var(--text);
+    .contact-row span { font-size: 0.82rem; color: var(--muted); }
+
+    .contact-action {
+      display: inline-flex; align-items: center;
+      height: 30px; padding: 0 14px; border-radius: 3px;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--surface); border: 1px solid var(--line-2);
+      color: var(--silver); white-space: nowrap;
+      transition: background .2s, color .2s, border-color .2s;
     }
 
-    .quote-box .author {
-      color: var(--muted-2);
-      font-size: 0.86rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .contact-action:hover {
+      background: var(--surface-2); color: var(--text);
+      border-color: rgba(200,200,200,0.24);
     }
 
+    .quote-card {
+      background: linear-gradient(148deg, var(--surface-2) 0%, transparent 70%);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 32px; display: flex; flex-direction: column; gap: 20px; position: relative;
+    }
+
+    .quote-mark {
+      font-family: var(--serif); font-size: 6rem; line-height: 0.65;
+      color: var(--muted-2); opacity: 0.45;
+      position: absolute; top: 18px; left: 24px;
+      pointer-events: none; user-select: none;
+    }
+
+    .quote-text {
+      font-family: var(--serif); font-size: 1.18rem; font-style: italic;
+      font-weight: 500; line-height: 1.65; color: var(--text); padding-top: 30px;
+    }
+
+    .quote-author {
+      font-size: 0.7rem; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--muted-2);
+    }
+
+    .quote-minis { display: grid; gap: 10px; margin-top: auto; }
+
+    /* ── FOOTER ── */
     .footer {
-      padding: 34px 0 52px;
-      color: var(--muted);
-      font-size: 0.92rem;
+      border-top: 1px solid var(--line);
+      padding: 28px 0 50px; position: relative; z-index: 1;
     }
 
     .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: center;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-      flex-wrap: wrap;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
     }
 
+    .footer-copy, .footer-tag {
+      font-size: 0.81rem; color: var(--muted-2); letter-spacing: 0.03em;
+    }
+
+    /* ── FADE ANIMATION ── */
     .fade-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .7s ease, transform .7s ease;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
     }
 
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+    .fade-up:nth-child(2) { transition-delay: .07s; }
+    .fade-up:nth-child(3) { transition-delay: .14s; }
+    .fade-up:nth-child(4) { transition-delay: .20s; }
+    .fade-up:nth-child(5) { transition-delay: .26s; }
+    .fade-up:nth-child(6) { transition-delay: .31s; }
+    .fade-up:nth-child(7) { transition-delay: .35s; }
+    .fade-up:nth-child(8) { transition-delay: .39s; }
+    .fade-up:nth-child(9) { transition-delay: .42s; }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 1060px) {
-      .hero-grid, .contact-box, .grid-2, .grid-3, .values, .companies, .mini-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .hero-copy { padding: 34px; }
-      .hero-card { padding: 22px; }
-      .company-card { min-height: 190px; }
-      .value-card { min-height: 160px; }
+      .hero-grid { grid-template-columns: 1fr 1fr; }
+      .hero-copy { padding: 38px; }
+      .values { grid-template-columns: repeat(2, 1fr); }
+      .companies { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 760px) {
-      .container { width: min(var(--max), calc(100% - 28px)); }
-      .nav { align-items: start; }
+      .container { width: min(var(--max), calc(100% - 32px)); }
       .nav-links { display: none; }
-      .hero { padding-top: 58px; padding-bottom: 30px; }
-      .hero-grid, .contact-box, .grid-2, .grid-3, .values, .companies, .mini-grid, .stats {
+      .hero { padding: 64px 0 48px; }
+      .hero-grid, .grid-2, .values, .companies,
+      .contact-grid, .mini-grid, .hero-stats {
         grid-template-columns: 1fr;
       }
-      .hero-copy { padding: 26px; }
-      .hero-card { padding: 20px; }
-      h1 { max-width: 12ch; }
-      .hero p { font-size: 0.98rem; }
-      .section-head { align-items: start; }
-      .timeline-item, .contact-row { grid-template-columns: 1fr; display: grid; }
+      .hero-copy { padding: 28px; }
+      .hero-card { padding: 26px; }
+      h1 { font-size: 3rem; }
+      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+      .contact-card { padding: 24px; }
     }
   </style>
 </head>
-<body class="noise">
+
+<body>
+
   <header class="nav-wrap">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="PS Business Group">
-        <img src="assets/logo.png" alt="PS Business Group logo" />
-        <div>
+        <div class="brand-logo">
+          <img src="assets/logo.png" alt="PS Business Group" />
+        </div>
+        <div class="brand-text">
           <strong>PS Business Group</strong>
           <span>Grupo empresarial binacional</span>
         </div>
       </a>
-
       <nav class="nav-links" aria-label="Navegação principal">
         <a href="#sobre">Sobre</a>
         <a href="#empresas">Empresas</a>
         <a href="#valores">Valores</a>
-        <a href="#contato">Contato</a>
+        <a href="#contato" class="nav-cta">Contato</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
+
+    <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy fade-up">
-          <div class="eyebrow">Holding empresarial binacional</div>
-          <h1>PS Business Group</h1>
-          <p>
-            Grupo empresarial com atuação no Brasil e Paraguai, com coordenação central e presença em diferentes segmentos.
+          <div class="eyebrow">
+            <span class="eyebrow-dash"></span>
+            Holding empresarial binacional
+          </div>
+          <h1>PS <em>Business</em> Group</h1>
+          <p class="hero-desc">
+            Grupo empresarial com atuação estruturada no Brasil e no Paraguai, integrando marcas e segmentos sob uma mesma visão estratégica.
           </p>
-
           <div class="hero-actions">
-            <a class="btn" href="#contato">Fale com o grupo</a>
+            <a class="btn-primary" href="#contato">Fale com o grupo</a>
             <a class="btn-ghost" href="#empresas">Ver empresas</a>
           </div>
-
-          <div class="stats">
-            <div class="stat">
-              <strong>Binacional</strong>
-              <span>Atuação estratégica entre Brasil e Paraguai</span>
-            </div>
-            <div class="stat">
-              <strong>Multissetorial</strong>
-              <span>Empresas conectadas em diferentes segmentos</span>
-            </div>
-            <div class="stat">
-              <strong>Institucional</strong>
-              <span>Gestão centralizada e direcionamento estratégico</span>
-            </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>Binacional</strong><span>Brasil e Paraguai</span></div>
+            <div class="stat"><strong>9 empresas</strong><span>Múltiplos segmentos</span></div>
+            <div class="stat"><strong>Holding</strong><span>Gestão centralizada</span></div>
           </div>
         </div>
 
         <aside class="hero-card fade-up">
-          <div class="title">Grupo</div>
+          <div class="card-label">Grupo</div>
           <h2>Estrutura empresarial com visão e direção estratégica.</h2>
-          <p>
-            O PS Business Group consolida diferentes empresas sob uma mesma base institucional,
-            mantendo organização, alinhamento estratégico e foco em expansão binacional.
-          </p>
-          <div class="logo-spot">
-            <img src="assets/logo.png" alt="Logo PS Business Group em destaque" />
+          <p>O PS Business Group consolida diferentes empresas sob uma mesma base institucional, mantendo organização e foco em expansão binacional.</p>
+          <div class="logo-stage">
+            <img src="assets/logo.png" alt="Logo PS Business Group" />
           </div>
           <div class="mini-grid">
             <div class="mini">
@@ -641,208 +689,303 @@
       </div>
     </section>
 
+    <div class="divider"></div>
+
+    <!-- SOBRE -->
     <section id="sobre">
       <div class="container">
-        <div class="section-head fade-up">
-          <h3>Sobre o PS Business Group</h3>
-          <p>Holding empresarial com atuação estruturada e foco em gestão, expansão e integração de negócios.</p>
+        <div class="section-header fade-up">
+          <div class="section-label">Sobre</div>
+          <h3>PS Business Group</h3>
+          <p>Holding empresarial com atuação estruturada e foco em gestão, expansão e integração de negócios no Brasil e no Paraguai.</p>
         </div>
-
         <div class="grid-2">
-          <article class="section-card fade-up">
-            <div class="icon">01</div>
+          <article class="info-card fade-up">
+            <div class="card-num">01</div>
             <h4>Posicionamento</h4>
-            <p>Atuação institucional com foco em gestão, consistência e presença nos mercados em que opera.</p>
+            <p>Atuação institucional com foco em gestão, consistência e presença nos mercados em que opera — com identidade sólida e visão de longo prazo.</p>
           </article>
-          <article class="section-card fade-up">
-            <div class="icon">02</div>
+          <article class="info-card fade-up">
+            <div class="card-num">02</div>
             <h4>Estrutura</h4>
-            <p>Integração de negócios com autonomia operacional e coordenação central sob uma mesma visão estratégica.</p>
+            <p>Integração de negócios com autonomia operacional e coordenação central sob uma mesma visão estratégica, garantindo coesão entre todas as marcas.</p>
           </article>
         </div>
       </div>
     </section>
 
+    <div class="divider"></div>
+
+    <!-- EMPRESAS -->
     <section id="empresas">
       <div class="container">
-        <div class="section-head fade-up">
-          <h3>Empresas do grupo</h3>
-          <p>A apresentação abaixo organiza as empresas em formato institucional, mantendo o foco no grupo.</p>
+        <div class="section-header fade-up">
+          <div class="section-label">Empresas do grupo</div>
+          <h3>Marcas do portfólio</h3>
+          <p>Cada empresa opera com identidade própria, conectada à visão e aos valores centrais do PS Business Group.</p>
         </div>
 
         <div class="companies">
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Liore Logística</h4><span class="pill">Logística</span></div>
-            <p>Operação voltada à movimentação, estruturação e conexão de fluxos logísticos.</p>
-            <div class="meta"><span class="pill">Operações</span><span class="pill">Distribuição</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/liore.png" alt="Liore Logística" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">L</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Liore Logística</span>
+              <span class="pill pill-accent">Logística</span>
+            </div>
+            <p class="company-desc">Operação voltada à movimentação, estruturação e conexão de fluxos logísticos com eficiência e abrangência.</p>
+            <div class="company-tags"><span class="pill">Operações</span><span class="pill">Distribuição</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Agrícola Santo Cristo</h4><span class="pill">Agro</span></div>
-            <p>Base agrícola com atuação em produção e negócios conectados ao campo.</p>
-            <div class="meta"><span class="pill">Produção</span><span class="pill">Agro</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/santo-cristo.png" alt="Agrícola Santo Cristo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">SC</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Agrícola Santo Cristo</span>
+              <span class="pill pill-accent">Agro</span>
+            </div>
+            <p class="company-desc">Base agrícola com atuação em produção e negócios conectados ao campo, com foco em resultados sustentáveis.</p>
+            <div class="company-tags"><span class="pill">Produção</span><span class="pill">Agronegócio</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Novus Mundi</h4><span class="pill">Educação</span></div>
-            <p>Marca educacional voltada a conhecimento, desenvolvimento e expansão intelectual.</p>
-            <div class="meta"><span class="pill">Ensino</span><span class="pill">Conhecimento</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/novus.png" alt="Novus Mundi" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">N</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Novus Mundi</span>
+              <span class="pill pill-accent">Educação</span>
+            </div>
+            <p class="company-desc">Marca educacional voltada a conhecimento, desenvolvimento e expansão intelectual com visão transformadora.</p>
+            <div class="company-tags"><span class="pill">Ensino</span><span class="pill">Conhecimento</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Legionis Sports</h4><span class="pill">Esportes</span></div>
-            <p>Atuação ligada a performance, lifestyle e comunidade esportiva.</p>
-            <div class="meta"><span class="pill">Performance</span><span class="pill">Lifestyle</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/legionis.png" alt="Legionis Sports" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">LS</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Legionis Sports</span>
+              <span class="pill pill-accent">Esportes</span>
+            </div>
+            <p class="company-desc">Atuação ligada a performance, lifestyle e comunidade esportiva, conectando pessoas e resultados.</p>
+            <div class="company-tags"><span class="pill">Performance</span><span class="pill">Lifestyle</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Stella Aurea Capital</h4><span class="pill">Finanças</span></div>
-            <p>Atuação institucional voltada a capital, estrutura financeira e visão de crescimento.</p>
-            <div class="meta"><span class="pill">Capital</span><span class="pill">Investimentos</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/stella.png" alt="Stella Aurea Capital" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">SA</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Stella Aurea Capital</span>
+              <span class="pill pill-accent">Finanças</span>
+            </div>
+            <p class="company-desc">Atuação institucional voltada a capital, estrutura financeira e visão de crescimento com solidez.</p>
+            <div class="company-tags"><span class="pill">Capital</span><span class="pill">Investimentos</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Horin Real Estate</h4><span class="pill">Imobiliário</span></div>
-            <p>Atuação voltada ao mercado imobiliário com posicionamento corporativo.</p>
-            <div class="meta"><span class="pill">Imóveis</span><span class="pill">Mercado</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/horin.png" alt="Horin Real Estate" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">H</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Horin Real Estate</span>
+              <span class="pill pill-accent">Imobiliário</span>
+            </div>
+            <p class="company-desc">Atuação voltada ao mercado imobiliário com posicionamento corporativo e foco em ativos estratégicos.</p>
+            <div class="company-tags"><span class="pill">Imóveis</span><span class="pill">Mercado</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Vincere Travel</h4><span class="pill">Turismo</span></div>
-            <p>Turismo corporativo e serviços de viagem com atuação institucional.</p>
-            <div class="meta"><span class="pill">Viagens</span><span class="pill">Corporativo</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/vincere.png" alt="Vincere Travel" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">VT</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Vincere Travel</span>
+              <span class="pill pill-accent">Turismo</span>
+            </div>
+            <p class="company-desc">Turismo corporativo e serviços de viagem com atuação institucional, conectando destinos e negócios.</p>
+            <div class="company-tags"><span class="pill">Viagens</span><span class="pill">Corporativo</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Libertare</h4><span class="pill">Jurídico</span></div>
-            <p>Estrutura jurídica para atuação em múltiplas frentes do direito.</p>
-            <div class="meta"><span class="pill">Direito</span><span class="pill">Consultoria</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/libertare.png" alt="Libertare" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">Lb</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Libertare</span>
+              <span class="pill pill-accent">Jurídico</span>
+            </div>
+            <p class="company-desc">Estrutura jurídica para atuação em múltiplas frentes do direito, com consultoria especializada e sólida.</p>
+            <div class="company-tags"><span class="pill">Direito</span><span class="pill">Consultoria</span></div>
           </article>
+
           <article class="company-card fade-up">
-            <div class="company-top"><h4>Pro96 Automotive</h4><span class="pill">Automotivo</span></div>
-            <p>Atuação automotiva voltada a performance, estética e veículos exclusivos.</p>
-            <div class="meta"><span class="pill">Performance</span><span class="pill">Estética</span></div>
+            <div class="company-logo">
+              <img src="assets/empresas/pro96.png" alt="Pro96 Automotive" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <span class="company-logo-fb" style="display:none">96</span>
+            </div>
+            <div class="company-header">
+              <span class="company-name">Pro96 Automotive</span>
+              <span class="pill pill-accent">Automotivo</span>
+            </div>
+            <p class="company-desc">Atuação automotiva voltada a performance, estética e veículos exclusivos com padrão elevado.</p>
+            <div class="company-tags"><span class="pill">Performance</span><span class="pill">Estética</span></div>
           </article>
         </div>
       </div>
     </section>
 
+    <div class="divider"></div>
+
+    <!-- VALORES -->
     <section id="valores">
       <div class="container">
-        <div class="section-head fade-up">
-          <h3>Valores do grupo</h3>
-          <p>Princípios que orientam a atuação e a gestão do grupo.</p>
+        <div class="section-header fade-up">
+          <div class="section-label">Valores</div>
+          <h3>Princípios do grupo</h3>
+          <p>Bases que orientam a atuação, a gestão e a cultura do PS Business Group.</p>
         </div>
-
         <div class="values">
           <article class="value-card fade-up">
+            <div class="value-mark">I</div>
             <strong>Visão estratégica</strong>
-            <p>Cada empresa integra uma estrutura maior, pensada para crescimento e posicionamento.</p>
+            <p>Cada empresa integra uma estrutura maior, pensada para crescimento e posicionamento de longo prazo.</p>
           </article>
           <article class="value-card fade-up">
+            <div class="value-mark">II</div>
             <strong>Governança</strong>
-            <p>Organização, direção e consistência para sustentar operações com clareza institucional.</p>
+            <p>Organização, direção e consistência para sustentar operações com clareza institucional e responsabilidade.</p>
           </article>
           <article class="value-card fade-up">
+            <div class="value-mark">III</div>
             <strong>Expansão</strong>
-            <p>Presença binacional e abertura para novas frentes, conexões e oportunidades.</p>
+            <p>Presença binacional e abertura permanente para novas frentes, conexões e oportunidades de mercado.</p>
           </article>
           <article class="value-card fade-up">
-            <strong>Posicionamento institucional</strong>
+            <div class="value-mark">IV</div>
+            <strong>Posicionamento</strong>
             <p>Comunicação alinhada à atuação do grupo, com clareza, consistência e foco nos negócios.</p>
           </article>
         </div>
       </div>
     </section>
 
+    <div class="divider"></div>
+
+    <!-- ESTRUTURA -->
     <section>
       <div class="container">
-        <div class="section-head fade-up">
-          <h3>Estrutura institucional</h3>
+        <div class="section-header fade-up">
+          <div class="section-label">Estrutura</div>
+          <h3>Organização institucional</h3>
           <p>Uma leitura rápida da organização do grupo e da direção estratégica da marca principal.</p>
         </div>
-
-        <div class="timeline section-card fade-up">
+        <div class="structure-card fade-up">
           <div class="timeline-item">
-            <strong>Grupo</strong>
-            <span>PS Business Group como marca central e eixo institucional de todas as frentes.</span>
+            <div class="tl-key">Grupo</div>
+            <div class="tl-val">PS Business Group como marca central e eixo institucional de todas as frentes e empresas do portfólio.</div>
           </div>
           <div class="timeline-item">
-            <strong>Empresas</strong>
-            <span>Marcas com identidade própria, organizadas sob a mesma visão estratégica.</span>
+            <div class="tl-key">Empresas</div>
+            <div class="tl-val">Marcas com identidade própria e autonomia operacional, organizadas sob a mesma visão estratégica do grupo.</div>
           </div>
           <div class="timeline-item">
-            <strong>Mercados</strong>
-            <span>Atuação no Brasil e no Paraguai, com potencial de ampliação para novos mercados.</span>
+            <div class="tl-key">Mercados</div>
+            <div class="tl-val">Atuação no Brasil e no Paraguai, com estrutura preparada para ampliação e novos mercados.</div>
           </div>
         </div>
       </div>
     </section>
 
+    <div class="divider"></div>
+
+    <!-- CONTATO -->
     <section id="contato">
       <div class="container">
-        <div class="section-head fade-up">
+        <div class="section-header fade-up">
+          <div class="section-label">Contato</div>
           <h3>Contato institucional</h3>
-          <p>Ajuste os dados oficiais antes da publicação final para manter a comunicação consistente.</p>
+          <p>Canais para parceiros, investidores e contatos estratégicos do grupo.</p>
         </div>
-
-        <div class="contact-box">
-          <article class="section-card fade-up">
+        <div class="contact-grid">
+          <article class="contact-card fade-up">
             <h4>Fale com o PS Business Group</h4>
             <p>Direcione parceiros, investidores e leads estratégicos para o canal correto do grupo.</p>
-
             <div class="contact-list">
               <div class="contact-row">
                 <div>
                   <strong>E-mail corporativo</strong>
-                  <span>contato@psbusinessgroup.com.br</span>
+                  <span>contato@psbusiness.group</span>
                 </div>
-                <a class="pill" href="mailto:contato@psbusinessgroup.com.br">Enviar</a>
+                <a class="contact-action" href="mailto:contato@psbusiness.group">Enviar</a>
               </div>
               <div class="contact-row">
                 <div>
                   <strong>WhatsApp</strong>
                   <span>Adicionar número oficial</span>
                 </div>
-                <a class="pill" href="#">Abrir</a>
+                <a class="contact-action" href="#">Abrir</a>
               </div>
               <div class="contact-row">
                 <div>
                   <strong>LinkedIn</strong>
                   <span>Adicionar perfil institucional</span>
                 </div>
-                <a class="pill" href="#">Visitar</a>
+                <a class="contact-action" href="#">Visitar</a>
               </div>
             </div>
           </article>
 
-          <article class="quote-box fade-up">
-            <div class="quote">“Estrutura, visão e presença para conectar negócios com solidez e direção.”</div>
-            <div class="author">PS Business Group</div>
-            <div class="mini">
-              <strong>Relacionamento institucional</strong>
-              <span>Parcerias, operações e oportunidades alinhadas à visão do grupo.</span>
-            </div>
-            <div class="mini">
-              <strong>Presença de marca</strong>
-              <span>Comunicação objetiva e consistente em todos os pontos de contato.</span>
+          <article class="quote-card fade-up">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">Estrutura, visão e presença para conectar negócios com solidez e direção.</p>
+            <div class="quote-author">PS Business Group</div>
+            <div class="quote-minis">
+              <div class="mini">
+                <strong>Relacionamento institucional</strong>
+                <span>Parcerias, operações e oportunidades alinhadas à visão do grupo.</span>
+              </div>
+              <div class="mini">
+                <strong>Presença de marca</strong>
+                <span>Comunicação objetiva e consistente em todos os pontos de contato.</span>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
     <div class="container footer-inner">
-      <div>© <span id="year"></span> PS Business Group. Todos os direitos reservados.</div>
-      <div>Grupo empresarial binacional</div>
+      <div class="footer-copy">© <span id="year"></span> PS Business Group. Todos os direitos reservados.</div>
+      <div class="footer-tag">Grupo empresarial binacional</div>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
-    }, { threshold: 0.14 });
+    }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
   </script>
+
 </body>
 </html>
